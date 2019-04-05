@@ -1,4 +1,4 @@
-# MariosPizzabar
+# Marios Pizzabar
 
 ## Group members
 - Caroline Lærke Høg-Iversen cph-ch465@cphbusiness.dk
