@@ -1,11 +1,11 @@
-DROP TABLE  if exists Bestillingslinje;
+DROP TABLE  if exists Bestillingslinjer;
 DROP TABLE if exists Bestillinger;
 DROP TABLE if exists Pizzaer;
 
 
 CREATE TABLE  Bestillinger(	
 	Bestilnr INTEGER NOT NULL AUTO_INCREMENT,
-	Afhenttid TIME(6),
+	Afhenttid TIME(),
 	PRIMARY KEY (Bestilnr)
 ); 
 
@@ -17,7 +17,7 @@ CREATE TABLE Pizzaer(
 	PRIMARY KEY (Pizzanr)
 );
 
-CREATE TABLE Bestillingslinje(
+CREATE TABLE Bestillingslinjer(
 	Antal INTEGER NOT NULL,
     Pizzanr INTEGER NOT NULL,
     Bestilnr INTEGER NOT NULL,
