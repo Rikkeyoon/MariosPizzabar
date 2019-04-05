@@ -12,5 +12,6 @@ public class NewClass {
     public static void main(String[] args) {
         System.out.println("");
         System.out.println("Nu er jeg med");
+        System.out.println("Det er jeg også;P");
     }
 }
