@@ -5,7 +5,7 @@ DROP TABLE if exists Pizzaer;
 
 CREATE TABLE  Bestillinger(	
 	Bestilnr INTEGER NOT NULL AUTO_INCREMENT,
-	Afhenttid TIME(),
+	Afhenttid TIME,
 	PRIMARY KEY (Bestilnr)
 ); 
 
