@@ -5,12 +5,11 @@ package sp3gruppe1;
  */
 
 public class SP3Gruppe1 {
-
    
     public static void main(String[] args) {
         System.out.println("hej");
         System.out.println("hallo");
-        System.out.println("Ollo");
+        System.out.println("Ollo - virk nu!");
        
     }
 
