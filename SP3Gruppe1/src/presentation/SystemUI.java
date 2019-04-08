@@ -28,10 +28,6 @@ public class SystemUI implements UI {
         System.out.println("Kunden har fået ordre nr: " + bestilling.getOrdreNr());
     }
 
-    @Override
-    public void visMenukort(Menukort menukort) {
-        System.out.println(menukort.toString());
-    }
 
     @Override
     public void visHovedmenu() {
@@ -69,6 +65,11 @@ public class SystemUI implements UI {
     @Override
     public int vælgOrdreNr() {
         return input.nextInt();
+    }
+
+    @Override
+    public void visMenukort(int pizzaNr, String pizzaNavn, String toppings, double pris) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

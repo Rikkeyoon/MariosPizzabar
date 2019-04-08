@@ -33,10 +33,7 @@ public class FakeUI implements UI {
         output.add("" + bestilling.getOrdreNr());
     }
 
-    @Override
-    public void visMenukort(Menukort menukort) {
-        output.add(menukort.toString());
-    }
+
 
     @Override
     public void visHovedmenu() {
@@ -74,6 +71,11 @@ public class FakeUI implements UI {
     @Override
     public int vælgOrdreNr() {
         return Integer.parseInt(input[index++]);
+    }
+
+    @Override
+    public void visMenukort(int pizzaNr, String pizzaNavn, String toppings, double pris) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
