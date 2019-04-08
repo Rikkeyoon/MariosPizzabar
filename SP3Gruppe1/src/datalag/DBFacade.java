@@ -18,7 +18,7 @@ public class DBFacade {
     private final String PASSWORD = "root";
     private final String IP = "localhost";
     private final String PORT = "3306";
-    private final String DATABASE = "MariosPizzabar";
+    private final String DATABASE = "mariospizzabar";
     private final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
             + "?useJDBCcompliantTimeZoneShift=true&"
             + "useLegacyDatetimeCode=false&serverTimezone=UTC";
