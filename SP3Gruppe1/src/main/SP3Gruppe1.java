@@ -1,6 +1,6 @@
 package main;
 
-import datalag.FakeDBFacade;
+import datalag.DBFacade;
 import presentation.SystemUI;
 
 /*
@@ -11,7 +11,7 @@ public class SP3Gruppe1 {
    
     public static void main(String[] args) {
         SystemUI ui = new SystemUI();
-        FakeDBFacade fakeDB = new FakeDBFacade(ui);
+        DBFacade fakeDB = new DBFacade(ui);
         fakeDB.visMenukort();
        
     }

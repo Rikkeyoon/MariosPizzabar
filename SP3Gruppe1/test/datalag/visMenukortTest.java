@@ -14,7 +14,7 @@ public class visMenukortTest {
         // arrange
         String[] input = {};
         FakeUI ui = new FakeUI(input);
-        FakeDBFacade fakeDB = new FakeDBFacade(ui);
+        DBFacade fakeDB = new DBFacade(ui);
         
         // act
         fakeDB.visMenukort();
