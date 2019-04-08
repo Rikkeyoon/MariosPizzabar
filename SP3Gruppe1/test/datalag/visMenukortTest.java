@@ -14,10 +14,10 @@ public class visMenukortTest {
         // arrange
         String[] input = {};
         FakeUI ui = new FakeUI(input);
-        DBFacade fakeDB = new DBFacade(ui);
+        DBFacade db = new DBFacade(ui);
         
         // act
-        fakeDB.visMenukort();
+        db.visMenukort();
         
         // assert
         assertTrue(ui.output.get(0).contains("Vesuvio"));

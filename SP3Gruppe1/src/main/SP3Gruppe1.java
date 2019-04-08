@@ -11,8 +11,8 @@ public class SP3Gruppe1 {
    
     public static void main(String[] args) {
         SystemUI ui = new SystemUI();
-        DBFacade fakeDB = new DBFacade(ui);
-        fakeDB.visMenukort();
+        DBFacade db = new DBFacade(ui);
+        db.visMenukort();
        
     }
 
