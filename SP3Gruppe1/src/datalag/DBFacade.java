@@ -1,5 +1,5 @@
 
-package businesslogic;
+package datalag;
 
 /*
  * @author Rikke, Nina og Caroline
