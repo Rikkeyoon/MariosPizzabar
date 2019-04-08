@@ -6,7 +6,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import presentation.FakeUI;
 import presentation.UI;
 
 /**
@@ -24,7 +23,7 @@ public class FakeDBFacade {
             + "useLegacyDatetimeCode=false&serverTimezone=UTC";
     private UI ui;
 
-    public FakeDBFacade(FakeUI ui) {
+    public FakeDBFacade(UI ui) {
         this.ui = ui;
     }
 
