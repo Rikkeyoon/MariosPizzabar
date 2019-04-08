@@ -1,4 +1,4 @@
-package businesslogic;
+package main;
 
 /*
  * @author Nina, Rikke og Caroline
