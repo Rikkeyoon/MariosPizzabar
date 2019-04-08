@@ -68,8 +68,8 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public void visMenukort(int pizzaNr, String pizzaNavn, String toppings, double pris) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void visMenukort(Pizza pizza) {
+        System.out.println(pizza.toString());
     }
 
 }

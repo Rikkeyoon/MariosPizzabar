@@ -1,5 +1,6 @@
 package datalag;
 
+import businesslogic.Pizza;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -38,7 +39,7 @@ public class FakeDBFacade {
                 String toppings = result.getString(3);
                 double pris = result.getDouble(4);
                 
-                ui.visMenukort(pizzaNr, pizzaNavn, toppings, pris);
+                ui.visMenukort(new Pizza(pizzaNr, pizzaNavn, toppings, pris));
             }
         } catch (SQLException e) {
 

@@ -17,5 +17,5 @@ public interface UI {
     public void visBestillingsliste();
     public void visAktiveOrdre(ArrayList<Bestilling> aktiveOrdre);
     public int vælgOrdreNr();
-    public void visMenukort(int pizzaNr, String pizzaNavn, String toppings, double pris);
+    public void visMenukort(Pizza pizza);
 }
