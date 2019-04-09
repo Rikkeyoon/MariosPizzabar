@@ -23,6 +23,6 @@ public class visMenukortTest {
         assertTrue(ui.output.get(0).contains("Vesuvio"));
         
     }
- 
+  
     
 }
