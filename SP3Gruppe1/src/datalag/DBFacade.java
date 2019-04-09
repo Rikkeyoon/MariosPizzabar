@@ -66,7 +66,7 @@ public class DBFacade {
         }
     }
 
-    public void gemBestillinger() {
+    public void gemBestilling() {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
@@ -96,6 +96,25 @@ public class DBFacade {
 
                 ui.visGemteBestillinger(new Bestilling(bestilNr, afhentTid, antal, pizzaNr));
             }
+        } catch (SQLException e) {
+
+        }
+    }
+
+    void opretBestilling() {
+        try {
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            int pizzaNr = ui.vælgPizzalNr();
+            int antal = ui.vælgAntal();
+            Time afhentTid = ui.vælgAfhentTid();
+            statement.executeLargeUpdate("INSERT INTO bestillinger(afhenttid) "
+                    + "VALUE ('" + afhentTid + "')");
+            ResultSet bestilNr = statement.executeQuery("SELECT LAST_INSERT_ID() FROM bestillinger;");
+            statement.executeLargeUpdate("INSERT INTO bestillingslinjer(antal, pizzanr, bestilnr) "
+                    + "VALUES (" + antal + ", " + pizzaNr + ", " + bestilNr + ")");
+            
+            
         } catch (SQLException e) {
 
         }

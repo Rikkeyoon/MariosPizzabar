@@ -1,6 +1,7 @@
 package presentation;
 
 import businesslogic.*;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /*
@@ -21,4 +22,11 @@ public interface UI {
     public int vælgBestilNrPåBestillingSomGemmes();
 
     public void visGemteBestillinger(Bestilling bestilling);
+    public void visBestillingsMenu();
+
+    public Time vælgAfhentTid();
+
+    public int vælgAntal();
+
+    public int vælgPizzalNr();
 }

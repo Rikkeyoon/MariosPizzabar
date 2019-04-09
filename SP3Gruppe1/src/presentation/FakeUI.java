@@ -1,6 +1,7 @@
 package presentation;
 
 import businesslogic.*;
+import java.sql.Time;
 import java.util.ArrayList;
 
 /*
@@ -81,6 +82,35 @@ public class FakeUI implements UI {
     @Override
     public void visGemteBestillinger(Bestilling bestilling) {
         output.add(bestilling.toString());
+    }
+
+       @Override
+    public void visBestillingsMenu() {
+        output.add("Bestillinger\n"
+                + "Vælg en af følgende muligheder:\n"
+                + "1. Opret bestilling\n"
+                + "2. Fjern bestilling\n"
+                + "3. Se gemte bestillinger\n"
+                + "4. Vend tilbage til hovedmenu\n"
+                + "5. Afslut program\n");
+    }
+
+    @Override
+    public Time vælgAfhentTid() {
+        output.add("Skriv hvornår bestillingen skal afhentes i HH:MM:SS format: ");
+        return Time.valueOf(input[index++]);
+    }
+
+    @Override
+    public int vælgAntal() {
+        output.add("Skriv hvor mange pizzaer af denne variant som kunden ønsker: ");
+        return Integer.parseInt(input[index++]);
+    }
+
+    @Override
+    public int vælgPizzalNr() {
+        output.add("Skriv hvilket pizzanummer kunden har bestilt: ");
+        return Integer.parseInt(input[index++]);
     }
     
 }
