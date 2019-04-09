@@ -77,14 +77,14 @@ public class DBFacade {
                     + "FROM bestillingslinjer WHERE bestillingslinjer.bestilnr = " + brugerValg);
             statement.executeLargeUpdate("DELETE FROM bestillingslinjer WHERE bestilnr =" + brugerValg);
             statement.executeLargeUpdate("DELETE FROM bestillinger WHERE bestilnr =" + brugerValg);
-            
         } catch (SQLException e) {
 
         }
     }
-    
-    public void visGemteBestillinger() throws SQLException {
-        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+
+    public void visGemteBestillinger() {
+        try {
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM gemte_bestillinger "
                     + "NATURAL JOIN gemte_bestillingslinjer");
@@ -96,5 +96,8 @@ public class DBFacade {
 
                 ui.visGemteBestillinger(new Bestilling(bestilNr, afhentTid, antal, pizzaNr));
             }
+        } catch (SQLException e) {
+
+        }
     }
 }
