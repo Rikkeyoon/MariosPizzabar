@@ -1,5 +1,6 @@
 package main;
 
+import businesslogic.Controller;
 import datalag.DBFacade;
 import presentation.SystemUI;
 
@@ -12,7 +13,8 @@ public class SP3Gruppe1 {
     public static void main(String[] args) {
         SystemUI ui = new SystemUI();
         DBFacade db = new DBFacade(ui);
-        db.visBestillinger();
+        Controller ctrl = new Controller(ui, db);
+        ctrl.start();
        
     }
 

@@ -28,7 +28,7 @@ public class Controller {
                     db.visMenukort();
                     break;
                 case "2":
-                    db.visBestillinger();
+                    ui.visBestillingsMenu();
                     do {
                         switch (ui.hovedmenuValg()) {
                             case "1":
