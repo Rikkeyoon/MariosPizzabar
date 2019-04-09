@@ -18,4 +18,7 @@ public interface UI {
     public int vælgOrdreNr();
     public void visMenukort(Pizza pizza);
     public void visBestillinger(Bestilling bestilling);
+    public int vælgBestilNrPåBestillingSomGemmes();
+
+    public void visGemteBestillinger(Bestilling bestilling);
 }

@@ -67,4 +67,15 @@ public class SystemUI implements UI {
         System.out.println(bestilling.toString());
     }
 
+    @Override
+    public int vælgBestilNrPåBestillingSomGemmes() {
+        System.out.println("Indtast bestillingsnummeret på den bestilling, som du vil fjerne: ");
+        return input.nextInt();
+    }
+
+    @Override
+    public void visGemteBestillinger(Bestilling bestilling) {
+        System.out.println(bestilling.toString());
+    }
+
 }

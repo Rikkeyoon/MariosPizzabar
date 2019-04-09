@@ -72,5 +72,15 @@ public class FakeUI implements UI {
     public void visBestillinger(Bestilling bestilling) {
         output.add(bestilling.toString());
     }
+
+    @Override
+    public int vælgBestilNrPåBestillingSomGemmes() {
+        return Integer.parseInt(input[index++]);
+    }
+
+    @Override
+    public void visGemteBestillinger(Bestilling bestilling) {
+        output.add(bestilling.toString());
+    }
     
 }

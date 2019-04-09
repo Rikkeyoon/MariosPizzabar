@@ -1,4 +1,3 @@
-
 package datalag;
 
 import businesslogic.Bestilling;
@@ -40,14 +39,13 @@ public class DBFacade {
                 String pizzaNavn = result.getString(2);
                 String toppings = result.getString(3);
                 double pris = result.getDouble(4);
-                
+
                 ui.visMenukort(new Pizza(pizzaNr, pizzaNavn, toppings, pris));
             }
         } catch (SQLException e) {
 
         }
-
-    }  
+    }
 
     public void visBestillinger() {
         try {
@@ -60,11 +58,43 @@ public class DBFacade {
                 Time afhentTid = result.getTime(2);
                 int antal = result.getInt(3);
                 int pizzaNr = result.getInt(4);
-                
+
                 ui.visBestillinger(new Bestilling(bestilNr, afhentTid, antal, pizzaNr));
             }
         } catch (SQLException e) {
 
         }
+    }
+
+    public void gemBestillinger() {
+        try {
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            int brugerValg = ui.vælgBestilNrPåBestillingSomGemmes();
+            statement.executeLargeUpdate("INSERT INTO gemte_bestillinger (bestilnr, afhenttid) SELECT bestilnr, afhenttid \n"
+                    + "FROM bestillinger WHERE bestillinger.bestilnr = " + brugerValg);
+            statement.executeLargeUpdate("INSERT INTO gemte_bestillingslinjer (antal, pizzanr, bestilnr) SELECT antal, pizzanr, bestilnr "
+                    + "FROM bestillingslinjer WHERE bestillingslinjer.bestilnr = " + brugerValg);
+            statement.executeLargeUpdate("DELETE FROM bestillingslinjer WHERE bestilnr =" + brugerValg);
+            statement.executeLargeUpdate("DELETE FROM bestillinger WHERE bestilnr =" + brugerValg);
+            
+        } catch (SQLException e) {
+
+        }
+    }
+    
+    public void visGemteBestillinger() throws SQLException {
+        Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM gemte_bestillinger "
+                    + "NATURAL JOIN gemte_bestillingslinjer");
+            while (result.next()) {
+                int bestilNr = result.getInt(1);
+                Time afhentTid = result.getTime(2);
+                int antal = result.getInt(3);
+                int pizzaNr = result.getInt(4);
+
+                ui.visGemteBestillinger(new Bestilling(bestilNr, afhentTid, antal, pizzaNr));
+            }
     }
 }

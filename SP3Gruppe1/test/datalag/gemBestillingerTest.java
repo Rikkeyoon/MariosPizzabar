@@ -4,24 +4,24 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 import presentation.FakeUI;
 
-/*
+/**
  *
- * @author Nina, Rikke og Caroline
+ * @author Caroline, Rikke og Nina
  */
-public class visBestillingerTest {
+public class gemBestillingerTest {
     
     @Test 
-    public void testVisBestillinger() {
+    public void testGemBestillinger() {
         // arrange
         String[] input = {};
         FakeUI ui = new FakeUI(input);
         DBFacade db = new DBFacade(ui);
         
         // act
-        db.visBestillinger();
+        db.gemBestillinger();
         
         // assert
         assertTrue(ui.output.get(0).contains("1"));
-        
     }
+    
 }
