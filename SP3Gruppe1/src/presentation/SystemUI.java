@@ -25,7 +25,7 @@ public class SystemUI implements UI {
 
     @Override
     public void visOrdreNr(Bestilling bestilling) {
-        System.out.println("Kunden har fået ordre nr: " + bestilling.getOrdreNr());
+        System.out.println("Kunden har fået ordre nr: " + bestilling.getBestilNr());
     }
 
 
@@ -40,16 +40,6 @@ public class SystemUI implements UI {
     @Override
     public String hovedmenuValg() {
         return input.nextLine();
-    }
-
-    @Override
-    public void visBestillingsliste() {
-        System.out.println("Bestillinger\n"
-                + "Vælg en af følgende muligheder:\n"
-                + "1. Opret bestilling\n"
-                + "2. Fjern bestilling\n"
-                + "3. Vend tilbage til hovedmenu\n"
-                + "4. Afslut program");
     }
 
     @Override
@@ -70,6 +60,11 @@ public class SystemUI implements UI {
     @Override
     public void visMenukort(Pizza pizza) {
         System.out.println(pizza.toString());
+    }
+
+    @Override
+    public void visBestillinger(Bestilling bestilling) {
+        System.out.println(bestilling.toString());
     }
 
 }

@@ -30,7 +30,7 @@ public class FakeUI implements UI {
 
     @Override
     public void visOrdreNr(Bestilling bestilling) {
-        output.add("" + bestilling.getOrdreNr());
+        output.add("" + bestilling.getBestilNr());
     }
 
 
@@ -46,16 +46,6 @@ public class FakeUI implements UI {
     @Override
     public String hovedmenuValg() {
         return input[index++];
-    }
-
-    @Override
-    public void visBestillingsliste() {
-        output.add("Bestillinger\n"
-                + "Vælg en af følgende muligheder:\n"
-                + "1. Opret bestilling\n"
-                + "2. Fjern bestilling\n"
-                + "3. Vend tilbage til hovedmenu\n"
-                + "4. Afslut program\n");
     }
 
     @Override
@@ -75,7 +65,12 @@ public class FakeUI implements UI {
 
     @Override
     public void visMenukort(Pizza pizza) {
-       output.add(pizza.toString());
+        output.add(pizza.toString());
+    }
+
+    @Override
+    public void visBestillinger(Bestilling bestilling) {
+        output.add(bestilling.toString());
     }
     
 }

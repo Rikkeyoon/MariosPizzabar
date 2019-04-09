@@ -1,12 +1,14 @@
 
 package datalag;
 
+import businesslogic.Bestilling;
 import businesslogic.Pizza;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 import presentation.UI;
 
 /*
@@ -46,4 +48,23 @@ public class DBFacade {
         }
 
     }  
+
+    public void visBestillinger() {
+        try {
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            ResultSet result = statement.executeQuery("SELECT * FROM bestillinger "
+                    + "NATURAL JOIN bestillingslinjer");
+            while (result.next()) {
+                int bestilNr = result.getInt(1);
+                Time afhentTid = result.getTime(2);
+                int antal = result.getInt(3);
+                int pizzaNr = result.getInt(4);
+                
+                ui.visBestillinger(new Bestilling(bestilNr, afhentTid, antal, pizzaNr));
+            }
+        } catch (SQLException e) {
+
+        }
+    }
 }
