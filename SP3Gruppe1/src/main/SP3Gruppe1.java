@@ -15,8 +15,5 @@ public class SP3Gruppe1 {
         DBFacade db = new DBFacade(ui);
         Controller ctrl = new Controller(ui, db);
         ctrl.start();
-        System.out.println("hej");
-       
     }
-
 }

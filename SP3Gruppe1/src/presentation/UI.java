@@ -19,4 +19,7 @@ public interface UI {
     public Time vælgAfhentTid();
     public int vælgAntal();
     public int vælgPizzalNr();
+
+    public void visPizzaNavn(String pizzaNavn);
+
 }

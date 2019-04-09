@@ -1,6 +1,7 @@
 package datalag;
 
 import businesslogic.Bestilling;
+import businesslogic.Bestillingslinje;
 import businesslogic.Pizza;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -59,7 +60,8 @@ public class DBFacade {
                 int antal = result.getInt(3);
                 int pizzaNr = result.getInt(4);
 
-                ui.visBestillinger(new Bestilling(bestilNr, afhentTid, antal, pizzaNr));
+                ui.visBestillinger(new Bestilling(bestilNr, afhentTid,
+                        new Bestillingslinje(antal, pizzaNr)));
             }
         } catch (SQLException e) {
 
@@ -94,7 +96,8 @@ public class DBFacade {
                 int antal = result.getInt(3);
                 int pizzaNr = result.getInt(4);
 
-                ui.visGemteBestillinger(new Bestilling(bestilNr, afhentTid, antal, pizzaNr));
+                ui.visGemteBestillinger(new Bestilling(bestilNr, afhentTid,
+                        new Bestillingslinje(antal, pizzaNr)));
             }
         } catch (SQLException e) {
 
@@ -105,16 +108,35 @@ public class DBFacade {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
+
             int pizzaNr = ui.vælgPizzalNr();
             int antal = ui.vælgAntal();
             Time afhentTid = ui.vælgAfhentTid();
+
             statement.executeLargeUpdate("INSERT INTO bestillinger(afhenttid) "
                     + "VALUE ('" + afhentTid + "')");
-            ResultSet bestilNr = statement.executeQuery("SELECT LAST_INSERT_ID() FROM bestillinger;");
+            ResultSet bestilNr = statement.executeQuery("SELECT LAST_INSERT_ID() FROM bestillinger");
             statement.executeLargeUpdate("INSERT INTO bestillingslinjer(antal, pizzanr, bestilnr) "
                     + "VALUES (" + antal + ", " + pizzaNr + ", " + bestilNr + ")");
-            
-            
+
+        } catch (SQLException e) {
+
+        }
+    }
+
+    public void visPizzaNavn() {
+        try {
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            int pizzaNr = ui.vælgPizzalNr();
+            ResultSet result = statement.executeQuery("SELECT pizzanavn FROM pizzaer "
+                    + "WHERE pizzanr = " + pizzaNr);
+            while (result.next()) {
+                String pizzaNavn = result.getString(2);
+                
+                ui.visPizzaNavn(pizzaNavn);
+            }
+
         } catch (SQLException e) {
 
         }

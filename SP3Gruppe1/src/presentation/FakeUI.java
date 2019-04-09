@@ -79,5 +79,11 @@ public class FakeUI implements UI {
         output.add("Skriv hvilket pizzanummer kunden har bestilt: ");
         return Integer.parseInt(input[index++]);
     }
+
+    @Override
+    public void visPizzaNavn(String pizzaNavn) {
+        output.add(pizzaNavn);
+    }
+
     
 }

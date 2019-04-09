@@ -76,4 +76,9 @@ public class SystemUI implements UI {
         return input.nextInt();
         
     }
+
+    @Override
+    public void visPizzaNavn(String pizzaNavn) {
+        System.out.println(pizzaNavn);
+    }
 }
