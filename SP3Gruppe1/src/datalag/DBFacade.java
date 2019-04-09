@@ -101,7 +101,7 @@ public class DBFacade {
         }
     }
 
-    void opretBestilling() {
+    public void opretBestilling() {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();

@@ -32,7 +32,7 @@ public class Controller {
                     do {
                         switch (ui.hovedmenuValg()) {
                             case "1":
-                                //db.opretBestilling();
+                                db.opretBestilling();
                                 break;
                             case "2":
                                 db.gemBestilling();
