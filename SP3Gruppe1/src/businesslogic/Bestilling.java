@@ -39,7 +39,7 @@ public class Bestilling {
     public String toString() {
         return "Ordre Nr:\t\t\t" + bestilNr
                 + "\nAfhentningstidspunkt:  \t" + afhentTid
-                + "\nOrdre beskrivelse:\n\t1 x " /*+ pizza.getPizzaNavn()*/
+                + "\nOrdre beskrivelse:\n\t" /*1 x " + pizza.getPizzaNavn()*/
                 + "\nPris: \t\t\t     " /*+ (int) pizza.getPris() + ",-\n"*/;
     }
 }
