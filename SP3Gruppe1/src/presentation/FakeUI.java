@@ -19,24 +19,6 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public int vælgPizza() {
-        output.add("Skriv hvilket pizza nummer kunden har bestilt: ");
-        return Integer.parseInt(input[index++]);
-    }
-
-    @Override
-    public void visPizzaValg(String str) {
-        output.add(str);
-    }
-
-    @Override
-    public void visOrdreNr(Bestilling bestilling) {
-        output.add("" + bestilling.getBestilNr());
-    }
-
-
-
-    @Override
     public void visHovedmenu() {
         output.add("Vælg en af følgende muligheder: ");
         output.add("1. Vis menukort");
@@ -47,21 +29,6 @@ public class FakeUI implements UI {
     @Override
     public String hovedmenuValg() {
         return input[index++];
-    }
-
-    @Override
-    public void visAktiveOrdre(ArrayList<Bestilling> aktiveOrdre) {
-        StringBuilder builder = new StringBuilder();
-        for (Bestilling bestilling : aktiveOrdre) {
-            builder.append(bestilling.toString());
-            builder.append("\n");
-        }
-        output.add(builder.toString());
-    }
-
-    @Override
-    public int vælgOrdreNr() {
-        return Integer.parseInt(input[index++]);
     }
 
     @Override
