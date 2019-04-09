@@ -11,14 +11,15 @@ import presentation.FakeUI;
 public class gemBestillingerTest {
     
     @Test 
-    public void testGemBestillinger() {
+    public void testGemBestillinger_VisGemteBestillinger() {
         // arrange
-        String[] input = {};
+        String[] input = {"1"};
         FakeUI ui = new FakeUI(input);
         DBFacade db = new DBFacade(ui);
         
         // act
         db.gemBestillinger();
+        db.visGemteBestillinger();
         
         // assert
         assertTrue(ui.output.get(0).contains("1"));
