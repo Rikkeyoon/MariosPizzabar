@@ -1,6 +1,6 @@
 package businesslogic;
 
-import java.sql.Time;
+import java.time.LocalTime;
 //import java.util.ArrayList;
 
 /*
@@ -9,10 +9,10 @@ import java.sql.Time;
 public class Bestilling {
 
     private int bestilNr;
-    private Time afhentTid;
+    private LocalTime afhentTid;
     private /*ArrayList<*/Bestillingslinje/*>*/ bestilLinje/*r*/;
     
-    public Bestilling(int bestilNr, Time afhentTid,
+    public Bestilling(int bestilNr, LocalTime afhentTid,
             /*ArrayList<*/Bestillingslinje/*>*/ bestilLinje/*r*/) {
         this.bestilNr = bestilNr;
         this.afhentTid = afhentTid;
@@ -23,7 +23,7 @@ public class Bestilling {
         return bestilNr;
     }
 
-    public Time getAfhentTid() {
+    public LocalTime getAfhentTid() {
         return afhentTid;
     }
 

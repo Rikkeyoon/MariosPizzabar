@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
+import java.time.LocalTime;
 import presentation.UI;
 
 /*
@@ -56,7 +57,8 @@ public class DBFacade {
                     + "NATURAL JOIN bestillingslinjer");
             while (result.next()) {
                 int bestilNr = result.getInt(1);
-                Time afhentTid = result.getTime(2);
+                Time sqlTid = result.getTime(2);
+                LocalTime afhentTid = sqlTid.toLocalTime();
                 int antal = result.getInt(3);
                 int pizzaNr = result.getInt(4);
 
@@ -92,7 +94,8 @@ public class DBFacade {
                     + "NATURAL JOIN gemte_bestillingslinjer");
             while (result.next()) {
                 int bestilNr = result.getInt(1);
-                Time afhentTid = result.getTime(2);
+                Time sqlTid = result.getTime(2);
+                LocalTime afhentTid = sqlTid.toLocalTime();
                 int antal = result.getInt(3);
                 int pizzaNr = result.getInt(4);
 
