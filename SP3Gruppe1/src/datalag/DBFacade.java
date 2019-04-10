@@ -114,7 +114,7 @@ public class DBFacade {
 
             int pizzaNr = ui.vælgPizzalNr();
             int antal = ui.vælgAntal();
-            Time afhentTid = ui.vælgAfhentTid();
+            LocalTime afhentTid = ui.vælgAfhentTid();
 
             statement.executeLargeUpdate("INSERT INTO bestillinger(afhenttid) "
                     + "VALUE ('" + afhentTid + "')");

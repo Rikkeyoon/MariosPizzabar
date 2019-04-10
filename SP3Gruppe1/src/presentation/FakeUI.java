@@ -1,7 +1,7 @@
 package presentation;
 
 import businesslogic.*;
-import java.sql.Time;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 /*
@@ -63,9 +63,9 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public Time vælgAfhentTid() {
+    public LocalTime vælgAfhentTid() {
         output.add("Skriv hvornår bestillingen skal afhentes i HH:MM:SS format: ");
-        return Time.valueOf(input[index++]);
+        return LocalTime.parse(input[index++]);
     }
 
     @Override

@@ -2,6 +2,7 @@ package presentation;
 
 import businesslogic.*;
 import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Scanner;
 
 /*
@@ -59,9 +60,10 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public Time vælgAfhentTid() {
+    public LocalTime vælgAfhentTid() {
         System.out.println("Skriv hvornår bestillingen skal afhentes i HH:MM:SS format: ");
-        return Time.valueOf(input.nextLine());
+        String time = input.nextLine();
+        return LocalTime.parse(time);
     }
 
     @Override

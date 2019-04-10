@@ -1,7 +1,7 @@
 package presentation;
 
 import businesslogic.*;
-import java.sql.Time;
+import java.time.LocalTime;
 
 /*
  * @author Stephanie, Nina, Rikke og Caroline
@@ -16,7 +16,7 @@ public interface UI {
     public int vælgBestilNrPåBestillingSomGemmes();
     public void visGemteBestillinger(Bestilling bestilling);
     public void visBestillingsMenu();
-    public Time vælgAfhentTid();
+    public LocalTime vælgAfhentTid();
     public int vælgAntal();
     public int vælgPizzalNr();
 
