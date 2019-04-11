@@ -1,5 +1,6 @@
 package datalag;
 
+import businesslogic.Controller;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import presentation.FakeUI;
@@ -13,16 +14,16 @@ public class gemBestillingTest {
     @Test 
     public void testGemBestilling_VisGemteBestillinger() {
         // arrange
-        String[] input = {"1"};
+        String[] input = {"2", "2", "5", "3", "18:00", "3", "1", "4", "0"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui);
+        DBFacade db = new DBFacade();
+        Controller ctrl = new Controller(ui, db);
         
         // act
-        db.gemBestilling();
-        db.hentGemteBestillinger();
+        ctrl.start();
         
         // assert
-        assertTrue(ui.output.get(0).contains("1"));
+        assertTrue(ui.output.get(8).contains("Afhentningstidspunkt"));
     }
     
 }

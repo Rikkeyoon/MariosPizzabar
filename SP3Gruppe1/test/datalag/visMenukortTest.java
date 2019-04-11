@@ -1,6 +1,7 @@
 
 package datalag;
 
+import businesslogic.Controller;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import presentation.FakeUI;
@@ -12,15 +13,16 @@ public class visMenukortTest {
     @Test
     public void testVisMenukort(){
         // arrange
-        String[] input = {};
+        String[] input = {"1", "0"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui);
+        DBFacade db = new DBFacade();
+        Controller ctrl = new Controller(ui, db);
         
         // act
-        db.hentMenukort();
+        ctrl.start();
         
         // assert
-        assertTrue(ui.output.get(0).contains("Vesuvio"));
+        assertTrue(ui.output.get(4).contains("Vesuvio"));
         
     }
   

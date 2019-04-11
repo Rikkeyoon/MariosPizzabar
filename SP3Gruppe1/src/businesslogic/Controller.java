@@ -21,6 +21,10 @@ public class Controller {
     private int antal;
     private LocalTime afhentTid;
     private int bestilNr = 1;
+
+    public ArrayList<Bestilling> getBestillinger() {
+        return bestillinger;
+    }
   
     public Controller(UI ui, DBFacade db) {
         this.compareAfhentTid = (Bestilling bestil1, Bestilling bestil2) -> {
@@ -72,7 +76,7 @@ public class Controller {
         } while (!quit);
     }
     
-    public void opretBestilling() {
+    private void opretBestilling() {
         //indlæs pizza nr
         pizzaNr = ui.vælgPizzaNr();
         
@@ -99,7 +103,7 @@ public class Controller {
         db.gemAfsluttetBestilling(brugerValg);
     }
     
-    public ArrayList<Bestilling> sorterBestillinger() {
+    private ArrayList<Bestilling> sorterBestillinger() {
         //sorter bestillingsliste efter den, som skal afhentes først
         Collections.sort(bestillinger, compareAfhentTid);
         return bestillinger;

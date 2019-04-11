@@ -22,7 +22,7 @@ public class FakeUI implements UI {
     public void visHovedmenu() {
         output.add("Vælg en af følgende muligheder: ");
         output.add("1. Vis menukort");
-        output.add("2. Opret bestilling");
+        output.add("2. bestilling");
         output.add("0. Afslut program");
     }
 
@@ -94,7 +94,7 @@ public class FakeUI implements UI {
 
     @Override
     public int bestillingsMenuValg() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return Integer.parseInt(input[index++]);
     }
 
     

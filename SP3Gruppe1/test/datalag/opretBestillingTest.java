@@ -1,5 +1,6 @@
 package datalag;
 
+import businesslogic.Controller;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import presentation.FakeUI;
@@ -12,16 +13,16 @@ public class opretBestillingTest {
     @Test
     public void testOpretBestilling(){
          // arrange
-        String[] input = {"1", "2", "18:00:00"};
+        String[] input = {"2", "2", "4", "3", "12:00", "0"};
         FakeUI ui = new FakeUI(input);
-        DBFacade db = new DBFacade(ui);
+        DBFacade db = new DBFacade();
+        Controller ctrl = new Controller(ui, db);
         
         // act
-        db.opretBestilling();
-        db.hentBestillinger();
+        ctrl.start();
         
         // assert
-        assertTrue(ui.output.get(3).contains("1"));
+        assertTrue(ctrl.getBestillinger().size() == 1);
     }
     
     
