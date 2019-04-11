@@ -57,12 +57,5 @@ INSERT INTO pizzaer (pizzanavn, toppings, pris) VALUES ('Le Blissola', 'tomatsau
 INSERT INTO pizzaer (pizzanavn, toppings, pris) VALUES ('Venezia', 'tomatsauce, ost, skinke, bacon og oregano', 61.0);
 INSERT INTO pizzaer (pizzanavn, toppings, pris) VALUES ('Mafia', 'tomatsauce, ost, pepperoni, bacon, løg og oregano', 61.0);
 
-INSERT INTO bestillinger (afhenttid) VALUES ('18:30:00');
-INSERT INTO bestillinger (afhenttid) VALUES ('18:45:00');
-
-INSERT INTO bestillingslinjer VALUES (1, 5, 1);
-INSERT INTO bestillingslinjer VALUES (2, 12, 2);
-
-
 commit;
 
