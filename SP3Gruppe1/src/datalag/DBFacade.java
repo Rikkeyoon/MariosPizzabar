@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Time;
 import java.time.LocalTime;
-import presentation.UI;
+import java.util.ArrayList;
 
 /*
  * @author Rikke, Nina og Caroline
@@ -25,13 +25,9 @@ public class DBFacade {
     private final String URL = "jdbc:mysql://" + IP + ":" + PORT + "/" + DATABASE
             + "?useJDBCcompliantTimeZoneShift=true&"
             + "useLegacyDatetimeCode=false&serverTimezone=UTC";
-    private UI ui;
 
-    public DBFacade(UI ui) {
-        this.ui = ui;
-    }
-
-    public void visMenukort() {
+    public ArrayList<Pizza> visMenukort() {
+        ArrayList<Pizza> pizzaer = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
@@ -42,14 +38,16 @@ public class DBFacade {
                 String toppings = result.getString(3);
                 double pris = result.getDouble(4);
 
-                ui.visMenukort(new Pizza(pizzaNr, pizzaNavn, toppings, pris));
+                pizzaer.add(new Pizza(pizzaNr, pizzaNavn, toppings, pris));
             }
         } catch (SQLException e) {
 
         }
+        return pizzaer;
     }
 
-    public void visBestillinger() {
+    public ArrayList<Bestilling> visBestillinger() {
+        ArrayList<Bestilling> bestillinger = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
@@ -62,19 +60,20 @@ public class DBFacade {
                 int antal = result.getInt(3);
                 int pizzaNr = result.getInt(4);
 
-                ui.visBestillinger(new Bestilling(bestilNr, afhentTid,
+                bestillinger.add(new Bestilling(bestilNr, afhentTid,
                         new Bestillingslinje(antal, pizzaNr)));
             }
         } catch (SQLException e) {
 
         }
+        return bestillinger;
     }
 
-    public void gemBestilling() {
+    public void gemBestilling(int brugerValg) {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
-            int brugerValg = ui.vælgBestilNrPåBestillingSomGemmes();
+            //int brugerValg = ui.vælgBestilNrPåBestillingSomGemmes();
             statement.executeLargeUpdate("INSERT INTO gemte_bestillinger (bestilnr, afhenttid) SELECT bestilnr, afhenttid \n"
                     + "FROM bestillinger WHERE bestillinger.bestilnr = " + brugerValg);
             statement.executeLargeUpdate("INSERT INTO gemte_bestillingslinjer (antal, pizzanr, bestilnr) SELECT antal, pizzanr, bestilnr "
@@ -86,7 +85,8 @@ public class DBFacade {
         }
     }
 
-    public void visGemteBestillinger() {
+    public ArrayList<Bestilling> visGemteBestillinger() {
+        ArrayList<Bestilling> bestillinger = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
@@ -99,22 +99,23 @@ public class DBFacade {
                 int antal = result.getInt(3);
                 int pizzaNr = result.getInt(4);
 
-                ui.visGemteBestillinger(new Bestilling(bestilNr, afhentTid,
+                bestillinger.add(new Bestilling(bestilNr, afhentTid,
                         new Bestillingslinje(antal, pizzaNr)));
             }
         } catch (SQLException e) {
 
         }
+        return bestillinger;
     }
 
-    public void opretBestilling() {
+    public void opretBestilling(int pizzaNr, int antal, LocalTime afhentTid) {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
 
-            int pizzaNr = ui.vælgPizzalNr();
-            int antal = ui.vælgAntal();
-            LocalTime afhentTid = ui.vælgAfhentTid();
+            //int pizzaNr = ui.vælgPizzalNr();
+            //int antal = ui.vælgAntal();
+            //LocalTime afhentTid = ui.vælgAfhentTid();
 
             statement.executeLargeUpdate("INSERT INTO bestillinger(afhenttid) "
                     + "VALUE ('" + afhentTid + "')");
@@ -141,21 +142,21 @@ public class DBFacade {
         return bestilNr;
     }
 
-    public void visPizzaNavn() {
-        try {
-            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            Statement statement = connection.createStatement();
-            int pizzaNr = ui.vælgPizzalNr();
-            ResultSet result = statement.executeQuery("SELECT pizzanavn FROM pizzaer "
-                    + "WHERE pizzanr = " + pizzaNr);
-            while (result.next()) {
-                String pizzaNavn = result.getString(2);
-                
-                ui.visPizzaNavn(pizzaNavn);
-            }
-
-        } catch (SQLException e) {
-
-        }
-    }
+//    public void visPizzaNavn() {
+//        try {
+//            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+//            Statement statement = connection.createStatement();
+//            int pizzaNr = ui.vælgPizzalNr();
+//            ResultSet result = statement.executeQuery("SELECT pizzanavn FROM pizzaer "
+//                    + "WHERE pizzanr = " + pizzaNr);
+//            while (result.next()) {
+//                String pizzaNavn = result.getString(2);
+//                
+//                ui.visPizzaNavn(pizzaNavn);
+//            }
+//
+//        } catch (SQLException e) {
+//
+//        }
+//    }
 }
