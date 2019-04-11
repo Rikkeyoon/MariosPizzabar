@@ -79,7 +79,7 @@ public class SystemUI implements UI {
     }
 
     @Override
-    public int vælgPizzalNr() {
+    public int vælgPizzaNr() {
         System.out.println("Skriv hvilket pizzanummer kunden ønsker:");
         return input.nextInt();
         

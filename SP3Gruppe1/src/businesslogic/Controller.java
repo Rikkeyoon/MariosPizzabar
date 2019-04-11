@@ -1,6 +1,7 @@
 package businesslogic;
 
 import datalag.DBFacade;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -15,6 +16,9 @@ public class Controller {
     private DBFacade db;
     private ArrayList<Bestilling> bestillinger;
     private Comparator<Bestilling> compareAfhentTid;
+    private int pizzaNr;
+    private int antal;
+    private LocalTime afhentTid;
   
     public Controller(UI ui, DBFacade db) {
         this.compareAfhentTid = (Bestilling bestil1, Bestilling bestil2) -> {
@@ -42,7 +46,7 @@ public class Controller {
                                 db.visBestillinger();
                                 break;
                             case "2":
-                                db.opretBestilling();
+                                opretBestilling();
                                 break;
                             case "3":
                                 db.gemBestilling();
@@ -67,6 +71,24 @@ public class Controller {
                     throw new IllegalArgumentException();
             }
         } while (!quit);
+    }
+    
+    public void opretBestilling() {
+        //indlæs pizza nr
+        pizzaNr = ui.vælgPizzaNr();
+        
+        //indlæs antal pizzaer
+        antal = ui.vælgAntal();
+        
+        //indlæs afhentningstidspunkt
+        afhentTid = ui.vælgAfhentTid();
+
+        //opret bestilling
+        Bestillingslinje bestilLinje = new Bestillingslinje(antal, pizzaNr);
+        Bestilling bestilling = new Bestilling(afhentTid, bestilLinje);
+        
+        //gem bestilling i DB
+        db.opretBestilling(bestilling);
     }
     
     public ArrayList<Bestilling> sorterBestillinger() {

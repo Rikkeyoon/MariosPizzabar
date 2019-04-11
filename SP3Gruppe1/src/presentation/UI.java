@@ -18,7 +18,7 @@ public interface UI {
     public void visBestillingsMenu();
     public LocalTime vælgAfhentTid();
     public int vælgAntal();
-    public int vælgPizzalNr();
+    public int vælgPizzaNr();
     public void visPizzaNavn(String pizzaNavn);
 
 }

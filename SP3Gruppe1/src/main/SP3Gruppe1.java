@@ -12,7 +12,7 @@ public class SP3Gruppe1 {
    
     public static void main(String[] args) {
         SystemUI ui = new SystemUI();
-        DBFacade db = new DBFacade(ui);
+        DBFacade db = new DBFacade();
         Controller ctrl = new Controller(ui, db);
         ctrl.start();
     }

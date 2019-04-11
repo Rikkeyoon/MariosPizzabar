@@ -108,7 +108,7 @@ public class DBFacade {
         return bestillinger;
     }
 
-    public void opretBestilling(int pizzaNr, int antal, LocalTime afhentTid) {
+    public void opretBestilling(Bestilling bestilling) {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
@@ -118,10 +118,10 @@ public class DBFacade {
             //LocalTime afhentTid = ui.vælgAfhentTid();
 
             statement.executeLargeUpdate("INSERT INTO bestillinger(afhenttid) "
-                    + "VALUE ('" + afhentTid + "')");
+                    + "VALUE ('" + bestilling.getAfhentTid() + "')");
             int bestilNr = findBestilNr();
-            statement.executeLargeUpdate("INSERT INTO bestillingslinjer(antal, pizzanr, bestilnr) "
-                    + "VALUES (" + antal + ", " + pizzaNr + ", " + bestilNr + ")");
+//            statement.executeLargeUpdate("INSERT INTO bestillingslinjer(antal, pizzanr, bestilnr) "
+//                    + "VALUES (" + antal + ", " + pizzaNr + ", " + bestilNr + ")");
 
         } catch (SQLException e) {
 
