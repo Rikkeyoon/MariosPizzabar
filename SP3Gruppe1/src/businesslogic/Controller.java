@@ -36,10 +36,10 @@ public class Controller {
 
         do {
             switch (ui.hovedmenuValg()) {
-                case "1":
+                case 1:
                     visMenukort();
                     break;
-                case "2":
+                case 2:
                     ui.visBestillingsMenu();
                     do {
                         switch (ui.bestillingsMenuValg()) {
@@ -65,7 +65,7 @@ public class Controller {
                         }
                     } while (!quit);
                     break;
-                case "0":
+                case 0:
                     quit = true;
                     break;
                 default:
