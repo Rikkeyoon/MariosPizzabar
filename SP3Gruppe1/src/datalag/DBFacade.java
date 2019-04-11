@@ -73,7 +73,6 @@ public class DBFacade {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
-            //int brugerValg = ui.vælgBestilNrPåBestillingSomGemmes();
             statement.executeLargeUpdate("INSERT INTO gemte_bestillinger (bestilnr, afhenttid) SELECT bestilnr, afhenttid \n"
                     + "FROM bestillinger WHERE bestillinger.bestilnr = " + brugerValg);
             statement.executeLargeUpdate("INSERT INTO gemte_bestillingslinjer (antal, pizzanr, bestilnr) SELECT antal, pizzanr, bestilnr "
