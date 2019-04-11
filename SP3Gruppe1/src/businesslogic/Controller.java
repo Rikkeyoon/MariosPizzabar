@@ -42,24 +42,24 @@ public class Controller {
                 case "2":
                     ui.visBestillingsMenu();
                     do {
-                        switch (ui.hovedmenuValg()) {
-                            case "1":
+                        switch (ui.bestillingsMenuValg()) {
+                            case 1:
                                 visBestillinger();
                                 break;
-                            case "2":
+                            case 2:
                                 opretBestilling();
                                 break;
-                            case "3":
+                            case 3:
                                 fjernBestilling();
                                 break;
-                            case "4":
+                            case 4:
                                 visGemteBestillinger();
                                 break;
-                            case "5":
+                            case 5:
                                 quit = true;
                                 start();
                                 break;
-                            case "0":
+                            case 0:
                                 quit = true;
                                 break;
                         }
@@ -120,7 +120,7 @@ public class Controller {
 
     private void visGemteBestillinger() {
         gemteBestillinger = db.hentGemteBestillinger();
-        ui.visGemteBestillinger(bestillinger);
+        ui.visGemteBestillinger(gemteBestillinger);
     }
 
     

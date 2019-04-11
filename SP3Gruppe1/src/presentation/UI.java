@@ -21,5 +21,6 @@ public interface UI {
     public int vælgAntal();
     public int vælgPizzaNr();
     public void visPizzaNavn(String pizzaNavn);
+    public int bestillingsMenuValg();
 
 }

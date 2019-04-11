@@ -134,8 +134,6 @@ public class DBFacade {
         }
     }
     
-    
-    
     public int findBestilNr(){
         int bestilNr = 0;
         

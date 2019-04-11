@@ -92,5 +92,10 @@ public class FakeUI implements UI {
         output.add(pizzaNavn);
     }
 
+    @Override
+    public int bestillingsMenuValg() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 }
