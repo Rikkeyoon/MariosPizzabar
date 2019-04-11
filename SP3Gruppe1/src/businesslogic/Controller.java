@@ -90,6 +90,7 @@ public class Controller {
         
         //gem bestilling i DB
         db.gemBestilling(bestilling);
+        db.gemBestillingslinje(bestilling);
         
         //increment bestilNr
         bestilNr++;

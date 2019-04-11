@@ -26,6 +26,10 @@ public class Bestilling {
     public LocalTime getAfhentTid() {
         return afhentTid;
     }
+    
+    public Bestillingslinje getBestilLinje() {
+        return bestilLinje;
+    }
 
     @Override
     public String toString() {

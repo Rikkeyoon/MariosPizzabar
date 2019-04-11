@@ -114,14 +114,28 @@ public class DBFacade {
 
             statement.executeLargeUpdate("INSERT INTO bestillinger(afhenttid) "
                     + "VALUE ('" + bestilling.getAfhentTid() + "')");
-            int bestilNr = findBestilNr();
-//            statement.executeLargeUpdate("INSERT INTO bestillingslinjer(antal, pizzanr, bestilnr) "
-//                    + "VALUES (" + antal + ", " + pizzaNr + ", " + bestilNr + ")");
+//            int bestilNr = findBestilNr();
+        } catch (SQLException e) {
+
+        }
+    }
+    
+    public void gemBestillingslinje(Bestilling bestilling) {
+        try {
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+            statement.executeLargeUpdate("INSERT INTO bestillingslinjer(antal, pizzanr, bestilnr) "
+                   + "VALUES (" + bestilling.getBestilLinje().getAntal() 
+                    + ", " + bestilling.getBestilLinje().getPizzaNr() 
+                    + ", " + bestilling.getBestilNr() + ")");
 
         } catch (SQLException e) {
 
         }
     }
+    
+    
+    
     public int findBestilNr(){
         int bestilNr = 0;
         
