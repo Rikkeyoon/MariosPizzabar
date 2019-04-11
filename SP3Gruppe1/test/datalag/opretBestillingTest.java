@@ -18,7 +18,7 @@ public class opretBestillingTest {
         
         // act
         db.opretBestilling();
-        db.visBestillinger();
+        db.hentBestillinger();
         
         // assert
         assertTrue(ui.output.get(3).contains("1"));

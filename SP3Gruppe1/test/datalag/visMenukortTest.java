@@ -17,7 +17,7 @@ public class visMenukortTest {
         DBFacade db = new DBFacade(ui);
         
         // act
-        db.visMenukort();
+        db.hentMenukort();
         
         // assert
         assertTrue(ui.output.get(0).contains("Vesuvio"));

@@ -26,7 +26,7 @@ public class DBFacade {
             + "?useJDBCcompliantTimeZoneShift=true&"
             + "useLegacyDatetimeCode=false&serverTimezone=UTC";
 
-    public ArrayList<Pizza> visMenukort() {
+    public ArrayList<Pizza> hentMenukort() {
         ArrayList<Pizza> pizzaer = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -46,7 +46,7 @@ public class DBFacade {
         return pizzaer;
     }
 
-    public ArrayList<Bestilling> visBestillinger() {
+    public ArrayList<Bestilling> hentBestillinger() {
         ArrayList<Bestilling> bestillinger = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -69,7 +69,7 @@ public class DBFacade {
         return bestillinger;
     }
 
-    public void gemBestilling(int brugerValg) {
+    public void gemAfsluttetBestilling(int brugerValg) {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
@@ -85,7 +85,7 @@ public class DBFacade {
         }
     }
 
-    public ArrayList<Bestilling> visGemteBestillinger() {
+    public ArrayList<Bestilling> hentGemteBestillinger() {
         ArrayList<Bestilling> bestillinger = new ArrayList<>();
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
@@ -108,14 +108,10 @@ public class DBFacade {
         return bestillinger;
     }
 
-    public void opretBestilling(Bestilling bestilling) {
+    public void gemBestilling(Bestilling bestilling) {
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement statement = connection.createStatement();
-
-            //int pizzaNr = ui.vælgPizzalNr();
-            //int antal = ui.vælgAntal();
-            //LocalTime afhentTid = ui.vælgAfhentTid();
 
             statement.executeLargeUpdate("INSERT INTO bestillinger(afhenttid) "
                     + "VALUE ('" + bestilling.getAfhentTid() + "')");

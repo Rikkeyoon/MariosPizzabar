@@ -32,13 +32,17 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void visMenukort(Pizza pizza) {
-        output.add(pizza.toString());
+    public void visMenukort(ArrayList<Pizza> menukort) {
+        for (Pizza pizza : menukort) {
+            output.add(pizza.toString());
+        }
     }
 
     @Override
-    public void visBestillinger(Bestilling bestilling) {
-        output.add(bestilling.toString());
+    public void visBestillinger(ArrayList<Bestilling> bestillinger) {
+        for (Bestilling bestilling : bestillinger) {
+           output.add(bestilling.toString()); 
+        }
     }
 
     @Override
@@ -47,8 +51,10 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public void visGemteBestillinger(Bestilling bestilling) {
-        output.add(bestilling.toString());
+    public void visGemteBestillinger(ArrayList<Bestilling> bestillinger) {
+        for (Bestilling bestilling : bestillinger) {
+           output.add(bestilling.toString()); 
+        }
     }
 
        @Override

@@ -18,7 +18,7 @@ public class visBestillingerTest {
         DBFacade db = new DBFacade(ui);
         
         // act
-        db.visBestillinger();
+        db.hentBestillinger();
         
         // assert
         assertTrue(ui.output.get(0).contains("1"));

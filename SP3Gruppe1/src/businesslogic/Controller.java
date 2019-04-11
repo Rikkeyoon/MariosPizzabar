@@ -15,6 +15,7 @@ public class Controller {
     private UI ui;
     private DBFacade db;
     private ArrayList<Bestilling> bestillinger;
+    private ArrayList<Bestilling> gemteBestillinger;
     private Comparator<Bestilling> compareAfhentTid;
     private int pizzaNr;
     private int antal;
@@ -36,23 +37,23 @@ public class Controller {
         do {
             switch (ui.hovedmenuValg()) {
                 case "1":
-                    db.visMenukort();
+                    visMenukort();
                     break;
                 case "2":
                     ui.visBestillingsMenu();
                     do {
                         switch (ui.hovedmenuValg()) {
                             case "1":
-                                db.visBestillinger();
+                                visBestillinger();
                                 break;
                             case "2":
                                 opretBestilling();
                                 break;
                             case "3":
-                                db.gemBestilling();
+                                fjernBestilling();
                                 break;
                             case "4":
-                                db.visGemteBestillinger();
+                                visGemteBestillinger();
                                 break;
                             case "5":
                                 quit = true;
@@ -88,10 +89,15 @@ public class Controller {
         Bestilling bestilling = new Bestilling(bestilNr, afhentTid, bestilLinje);
         
         //gem bestilling i DB
-        db.opretBestilling(bestilling);
+        db.gemBestilling(bestilling);
         
         //increment bestilNr
         bestilNr++;
+    }
+    
+    private void fjernBestilling() {
+        int brugerValg = ui.vælgBestilNrPåBestillingSomGemmes();
+        db.gemAfsluttetBestilling(brugerValg);
     }
     
     public ArrayList<Bestilling> sorterBestillinger() {
@@ -99,6 +105,24 @@ public class Controller {
         Collections.sort(bestillinger, compareAfhentTid);
         return bestillinger;
     }
+
+    private void visMenukort() {
+        ArrayList<Pizza> menukort = db.hentMenukort();
+        ui.visMenukort(menukort);
+    }
+
+    private void visBestillinger() {
+        bestillinger = db.hentBestillinger();
+        sorterBestillinger();
+        ui.visBestillinger(bestillinger);
+    }
+
+    private void visGemteBestillinger() {
+        gemteBestillinger = db.hentGemteBestillinger();
+        ui.visGemteBestillinger(bestillinger);
+    }
+
+    
 }
 
 

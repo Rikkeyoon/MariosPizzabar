@@ -19,7 +19,7 @@ public class gemBestillingTest {
         
         // act
         db.gemBestilling();
-        db.visGemteBestillinger();
+        db.hentGemteBestillinger();
         
         // assert
         assertTrue(ui.output.get(0).contains("1"));
