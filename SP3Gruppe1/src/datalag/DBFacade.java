@@ -118,13 +118,27 @@ public class DBFacade {
 
             statement.executeLargeUpdate("INSERT INTO bestillinger(afhenttid) "
                     + "VALUE ('" + afhentTid + "')");
-            ResultSet bestilNr = statement.executeQuery("SELECT LAST_INSERT_ID() FROM bestillinger");
+            int bestilNr = findBestilNr();
             statement.executeLargeUpdate("INSERT INTO bestillingslinjer(antal, pizzanr, bestilnr) "
                     + "VALUES (" + antal + ", " + pizzaNr + ", " + bestilNr + ")");
 
         } catch (SQLException e) {
 
         }
+    }
+    public int findBestilNr(){
+        int bestilNr = 0;
+        
+        try {
+            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement statement = connection.createStatement();
+
+            ResultSet result = statement.executeQuery("SELECT LAST_INSERT_ID() FROM bestillinger");
+            bestilNr = result.getInt(1);
+        } catch (SQLException e) {
+
+        }
+        return bestilNr;
     }
 
     public void visPizzaNavn() {
