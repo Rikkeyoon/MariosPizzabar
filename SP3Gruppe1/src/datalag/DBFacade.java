@@ -134,36 +134,7 @@ public class DBFacade {
         }
     }
     
-    public int findBestilNr(){
-        int bestilNr = 0;
-        
-        try {
-            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            Statement statement = connection.createStatement();
 
-            ResultSet result = statement.executeQuery("SELECT LAST_INSERT_ID() FROM bestillinger");
-            bestilNr = result.getInt(1);
-        } catch (SQLException e) {
 
-        }
-        return bestilNr;
-    }
 
-//    public void visPizzaNavn() {
-//        try {
-//            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
-//            Statement statement = connection.createStatement();
-//            int pizzaNr = ui.vælgPizzalNr();
-//            ResultSet result = statement.executeQuery("SELECT pizzanavn FROM pizzaer "
-//                    + "WHERE pizzanr = " + pizzaNr);
-//            while (result.next()) {
-//                String pizzaNavn = result.getString(2);
-//                
-//                ui.visPizzaNavn(pizzaNavn);
-//            }
-//
-//        } catch (SQLException e) {
-//
-//        }
-//    }
 }

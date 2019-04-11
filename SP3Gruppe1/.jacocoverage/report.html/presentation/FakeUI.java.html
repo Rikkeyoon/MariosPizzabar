@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>FakeUI.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SP3Gruppe1&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">presentation</a> &gt; <span class="el_source">FakeUI.java</span></div><h1>FakeUI.java</h1><pre class="source lang-java linenums">package presentation;
+
+import businesslogic.*;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+/*
+ * @author Nina, Rikke og Caroline
+ */
+
+public class FakeUI implements UI {
+    
+    String[] input;
+<span class="fc" id="L14">    int index = 0;</span>
+<span class="fc" id="L15">    public ArrayList&lt;String&gt; output = new ArrayList&lt;&gt;();</span>
+    
+<span class="fc" id="L17">    public FakeUI(String[] input) {</span>
+<span class="fc" id="L18">        this.input = input;</span>
+<span class="fc" id="L19">    }</span>
+
+    @Override
+    public void visHovedmenu() {
+<span class="fc" id="L23">        output.add(&quot;Vælg en af følgende muligheder: &quot;);</span>
+<span class="fc" id="L24">        output.add(&quot;1. Vis menukort&quot;);</span>
+<span class="fc" id="L25">        output.add(&quot;2. bestilling&quot;);</span>
+<span class="fc" id="L26">        output.add(&quot;0. Afslut program&quot;);</span>
+<span class="fc" id="L27">    }</span>
+
+    @Override
+    public int hovedmenuValg() {
+<span class="fc" id="L31">        return Integer.parseInt(input[index++]);</span>
+    }
+
+    @Override
+    public void visMenukort(ArrayList&lt;Pizza&gt; menukort) {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        for (Pizza pizza : menukort) {</span>
+<span class="fc" id="L37">            output.add(pizza.toString());</span>
+<span class="fc" id="L38">        }</span>
+<span class="fc" id="L39">    }</span>
+
+    @Override
+    public void visBestillinger(ArrayList&lt;Bestilling&gt; bestillinger) {
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        for (Bestilling bestilling : bestillinger) {</span>
+<span class="nc" id="L44">           output.add(bestilling.toString()); </span>
+<span class="nc" id="L45">        }</span>
+<span class="fc" id="L46">    }</span>
+
+    @Override
+    public int vælgBestilNrPåBestillingSomGemmes() {
+<span class="fc" id="L50">        return Integer.parseInt(input[index++]);</span>
+    }
+
+    @Override
+    public void visGemteBestillinger(ArrayList&lt;Bestilling&gt; bestillinger) {
+<span class="fc bfc" id="L55" title="All 2 branches covered.">        for (Bestilling bestilling : bestillinger) {</span>
+<span class="fc" id="L56">           output.add(bestilling.toString()); </span>
+<span class="fc" id="L57">        }</span>
+<span class="fc" id="L58">    }</span>
+
+       @Override
+    public void visBestillingsMenu() {
+<span class="fc" id="L62">        output.add(&quot;Bestillinger\n&quot;</span>
+                + &quot;Vælg en af følgende muligheder:\n&quot;
+                + &quot;1. Se bestillinger\n&quot;
+                + &quot;2. Opret bestilling\n&quot;
+                + &quot;3. Fjern bestilling\n&quot;
+                + &quot;4. Se gemte bestillinger\n&quot;
+                + &quot;5. Vend tilbage til hovedmenu\n&quot;
+                + &quot;0. Afslut program&quot;);
+<span class="fc" id="L70">    }</span>
+
+    @Override
+    public LocalTime vælgAfhentTid() {
+<span class="fc" id="L74">        output.add(&quot;Skriv hvornår bestillingen skal afhentes i HH:MM:SS format: &quot;);</span>
+<span class="fc" id="L75">        return LocalTime.parse(input[index++]);</span>
+    }
+
+    @Override
+    public int vælgAntal() {
+<span class="fc" id="L80">        output.add(&quot;Skriv hvor mange pizzaer af denne variant som kunden ønsker: &quot;);</span>
+<span class="fc" id="L81">        return Integer.parseInt(input[index++]);</span>
+    }
+
+    @Override
+    public int vælgPizzaNr() {
+<span class="fc" id="L86">        output.add(&quot;Skriv hvilket pizzanummer kunden har bestilt: &quot;);</span>
+<span class="fc" id="L87">        return Integer.parseInt(input[index++]);</span>
+    }
+
+    @Override
+    public void visPizzaNavn(String pizzaNavn) {
+<span class="nc" id="L92">        output.add(pizzaNavn);</span>
+<span class="nc" id="L93">    }</span>
+
+    @Override
+    public int bestillingsMenuValg() {
+<span class="fc" id="L97">        return Integer.parseInt(input[index++]);</span>
+    }
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>

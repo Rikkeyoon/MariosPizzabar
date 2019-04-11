@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="da"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../.resources/report.css" type="text/css"/><link rel="shortcut icon" href="../.resources/report.gif" type="image/gif"/><title>DBFacade.java</title><link rel="stylesheet" href="../.resources/prettify.css" type="text/css"/><script type="text/javascript" src="../.resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../.sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">JaCoCoverage analysis of project &quot;SP3Gruppe1&quot; (powered by JaCoCo from EclEmma)</a> &gt; <a href="index.source.html" class="el_package">datalag</a> &gt; <span class="el_source">DBFacade.java</span></div><h1>DBFacade.java</h1><pre class="source lang-java linenums">package datalag;
+
+import businesslogic.Bestilling;
+import businesslogic.Bestillingslinje;
+import businesslogic.Pizza;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.sql.Time;
+import java.time.LocalTime;
+import java.util.ArrayList;
+
+/*
+ * @author Rikke, Nina og Caroline
+ */
+<span class="fc" id="L18">public class DBFacade {</span>
+
+<span class="fc" id="L20">    private final String USER = &quot;root&quot;;</span>
+<span class="fc" id="L21">    private final String PASSWORD = &quot;root&quot;;</span>
+<span class="fc" id="L22">    private final String IP = &quot;localhost&quot;;</span>
+<span class="fc" id="L23">    private final String PORT = &quot;3306&quot;;</span>
+<span class="fc" id="L24">    private final String DATABASE = &quot;mariospizzabar&quot;;</span>
+<span class="fc" id="L25">    private final String URL = &quot;jdbc:mysql://&quot; + IP + &quot;:&quot; + PORT + &quot;/&quot; + DATABASE</span>
+            + &quot;?useJDBCcompliantTimeZoneShift=true&amp;&quot;
+            + &quot;useLegacyDatetimeCode=false&amp;serverTimezone=UTC&quot;;
+
+    public ArrayList&lt;Pizza&gt; hentMenukort() {
+<span class="fc" id="L30">        ArrayList&lt;Pizza&gt; pizzaer = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="fc" id="L32">            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);</span>
+<span class="fc" id="L33">            Statement statement = connection.createStatement();</span>
+<span class="fc" id="L34">            ResultSet result = statement.executeQuery(&quot;SELECT * FROM pizzaer&quot;);</span>
+<span class="fc bfc" id="L35" title="All 2 branches covered.">            while (result.next()) {</span>
+<span class="fc" id="L36">                int pizzaNr = result.getInt(1);</span>
+<span class="fc" id="L37">                String pizzaNavn = result.getString(2);</span>
+<span class="fc" id="L38">                String toppings = result.getString(3);</span>
+<span class="fc" id="L39">                double pris = result.getDouble(4);</span>
+
+<span class="fc" id="L41">                pizzaer.add(new Pizza(pizzaNr, pizzaNavn, toppings, pris));</span>
+<span class="fc" id="L42">            }</span>
+<span class="nc" id="L43">        } catch (SQLException e) {</span>
+
+<span class="fc" id="L45">        }</span>
+<span class="fc" id="L46">        return pizzaer;</span>
+    }
+
+    public ArrayList&lt;Bestilling&gt; hentBestillinger() {
+<span class="fc" id="L50">        ArrayList&lt;Bestilling&gt; bestillinger = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="fc" id="L52">            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);</span>
+<span class="fc" id="L53">            Statement statement = connection.createStatement();</span>
+<span class="fc" id="L54">            ResultSet result = statement.executeQuery(&quot;SELECT * FROM bestillinger &quot;</span>
+                    + &quot;NATURAL JOIN bestillingslinjer&quot;);
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">            while (result.next()) {</span>
+<span class="nc" id="L57">                int bestilNr = result.getInt(1);</span>
+<span class="nc" id="L58">                Time sqlTid = result.getTime(2);</span>
+<span class="nc" id="L59">                LocalTime afhentTid = sqlTid.toLocalTime();</span>
+<span class="nc" id="L60">                int antal = result.getInt(3);</span>
+<span class="nc" id="L61">                int pizzaNr = result.getInt(4);</span>
+
+<span class="nc" id="L63">                bestillinger.add(new Bestilling(bestilNr, afhentTid,</span>
+                        new Bestillingslinje(antal, pizzaNr)));
+<span class="nc" id="L65">            }</span>
+<span class="nc" id="L66">        } catch (SQLException e) {</span>
+
+<span class="fc" id="L68">        }</span>
+<span class="fc" id="L69">        return bestillinger;</span>
+    }
+
+    public void gemAfsluttetBestilling(int brugerValg) {
+        try {
+<span class="fc" id="L74">            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);</span>
+<span class="fc" id="L75">            Statement statement = connection.createStatement();</span>
+<span class="fc" id="L76">            statement.executeLargeUpdate(&quot;INSERT INTO gemte_bestillinger (bestilnr, afhenttid) SELECT bestilnr, afhenttid \n&quot;</span>
+                    + &quot;FROM bestillinger WHERE bestillinger.bestilnr = &quot; + brugerValg);
+<span class="fc" id="L78">            statement.executeLargeUpdate(&quot;INSERT INTO gemte_bestillingslinjer (antal, pizzanr, bestilnr) SELECT antal, pizzanr, bestilnr &quot;</span>
+                    + &quot;FROM bestillingslinjer WHERE bestillingslinjer.bestilnr = &quot; + brugerValg);
+<span class="fc" id="L80">            statement.executeLargeUpdate(&quot;DELETE FROM bestillingslinjer WHERE bestilnr =&quot; + brugerValg);</span>
+<span class="fc" id="L81">            statement.executeLargeUpdate(&quot;DELETE FROM bestillinger WHERE bestilnr =&quot; + brugerValg);</span>
+<span class="nc" id="L82">        } catch (SQLException e) {</span>
+
+<span class="fc" id="L84">        }</span>
+<span class="fc" id="L85">    }</span>
+
+    public ArrayList&lt;Bestilling&gt; hentGemteBestillinger() {
+<span class="fc" id="L88">        ArrayList&lt;Bestilling&gt; bestillinger = new ArrayList&lt;&gt;();</span>
+        try {
+<span class="fc" id="L90">            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);</span>
+<span class="fc" id="L91">            Statement statement = connection.createStatement();</span>
+<span class="fc" id="L92">            ResultSet result = statement.executeQuery(&quot;SELECT * FROM gemte_bestillinger &quot;</span>
+                    + &quot;NATURAL JOIN gemte_bestillingslinjer&quot;);
+<span class="fc bfc" id="L94" title="All 2 branches covered.">            while (result.next()) {</span>
+<span class="fc" id="L95">                int bestilNr = result.getInt(1);</span>
+<span class="fc" id="L96">                Time sqlTid = result.getTime(2);</span>
+<span class="fc" id="L97">                LocalTime afhentTid = sqlTid.toLocalTime();</span>
+<span class="fc" id="L98">                int antal = result.getInt(3);</span>
+<span class="fc" id="L99">                int pizzaNr = result.getInt(4);</span>
+
+<span class="fc" id="L101">                bestillinger.add(new Bestilling(bestilNr, afhentTid,</span>
+                        new Bestillingslinje(antal, pizzaNr)));
+<span class="fc" id="L103">            }</span>
+<span class="nc" id="L104">        } catch (SQLException e) {</span>
+
+<span class="fc" id="L106">        }</span>
+<span class="fc" id="L107">        return bestillinger;</span>
+    }
+
+    public void gemBestilling(Bestilling bestilling) {
+        try {
+<span class="fc" id="L112">            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);</span>
+<span class="fc" id="L113">            Statement statement = connection.createStatement();</span>
+
+<span class="fc" id="L115">            statement.executeLargeUpdate(&quot;INSERT INTO bestillinger(afhenttid) &quot;</span>
+<span class="fc" id="L116">                    + &quot;VALUE ('&quot; + bestilling.getAfhentTid() + &quot;')&quot;);</span>
+//            int bestilNr = findBestilNr();
+<span class="nc" id="L118">        } catch (SQLException e) {</span>
+
+<span class="fc" id="L120">        }</span>
+<span class="fc" id="L121">    }</span>
+    
+    public void gemBestillingslinje(Bestilling bestilling) {
+        try {
+<span class="fc" id="L125">            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);</span>
+<span class="fc" id="L126">            Statement statement = connection.createStatement();</span>
+<span class="fc" id="L127">            statement.executeLargeUpdate(&quot;INSERT INTO bestillingslinjer(antal, pizzanr, bestilnr) &quot;</span>
+<span class="fc" id="L128">                   + &quot;VALUES (&quot; + bestilling.getBestilLinje().getAntal() </span>
+<span class="fc" id="L129">                    + &quot;, &quot; + bestilling.getBestilLinje().getPizzaNr() </span>
+<span class="fc" id="L130">                    + &quot;, &quot; + bestilling.getBestilNr() + &quot;)&quot;);</span>
+
+<span class="fc" id="L132">        } catch (SQLException e) {</span>
+
+<span class="fc" id="L134">        }</span>
+<span class="fc" id="L135">    }</span>
+    
+    public int findBestilNr(){
+<span class="nc" id="L138">        int bestilNr = 0;</span>
+        
+        try {
+<span class="nc" id="L141">            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);</span>
+<span class="nc" id="L142">            Statement statement = connection.createStatement();</span>
+
+<span class="nc" id="L144">            ResultSet result = statement.executeQuery(&quot;SELECT LAST_INSERT_ID() FROM bestillinger&quot;);</span>
+<span class="nc" id="L145">            bestilNr = result.getInt(1);</span>
+<span class="nc" id="L146">        } catch (SQLException e) {</span>
+
+<span class="nc" id="L148">        }</span>
+<span class="nc" id="L149">        return bestilNr;</span>
+    }
+
+//    public void visPizzaNavn() {
+//        try {
+//            Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
+//            Statement statement = connection.createStatement();
+//            int pizzaNr = ui.vælgPizzalNr();
+//            ResultSet result = statement.executeQuery(&quot;SELECT pizzanavn FROM pizzaer &quot;
+//                    + &quot;WHERE pizzanr = &quot; + pizzaNr);
+//            while (result.next()) {
+//                String pizzaNavn = result.getString(2);
+//                
+//                ui.visPizzaNavn(pizzaNavn);
+//            }
+//
+//        } catch (SQLException e) {
+//
+//        }
+//    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.6.201602180812</span></div></body></html>
