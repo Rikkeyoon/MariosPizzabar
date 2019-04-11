@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public interface UI {
 
     public void visHovedmenu();
-    public String hovedmenuValg();
+    public int hovedmenuValg();
     public void visMenukort(ArrayList<Pizza> menukort);
     public void visBestillinger(ArrayList<Bestilling> bestillinger);
     public int vælgBestilNrPåBestillingSomGemmes();

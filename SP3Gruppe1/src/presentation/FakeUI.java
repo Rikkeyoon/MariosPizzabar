@@ -27,8 +27,8 @@ public class FakeUI implements UI {
     }
 
     @Override
-    public String hovedmenuValg() {
-        return input[index++];
+    public int hovedmenuValg() {
+        return Integer.parseInt(input[index++]);
     }
 
     @Override

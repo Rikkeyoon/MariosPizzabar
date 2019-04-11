@@ -23,7 +23,7 @@ public class SystemUI implements UI {
     }
     
     @Override
-    public String hovedmenuValg() {
+    public int hovedmenuValg() {
         int valg = input.nextInt();
         while (valg < 0 || valg > 2)
         {
@@ -31,7 +31,7 @@ public class SystemUI implements UI {
             valg = input.nextInt();
         }
     
-        return valg + "";
+        return valg;
     }
     
     @Override
