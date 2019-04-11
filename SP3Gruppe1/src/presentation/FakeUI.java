@@ -23,7 +23,7 @@ public class FakeUI implements UI {
         output.add("Vælg en af følgende muligheder: ");
         output.add("1. Vis menukort");
         output.add("2. Opret bestilling");
-        output.add("3. Afslut program");
+        output.add("0. Afslut program");
     }
 
     @Override
@@ -55,11 +55,12 @@ public class FakeUI implements UI {
     public void visBestillingsMenu() {
         output.add("Bestillinger\n"
                 + "Vælg en af følgende muligheder:\n"
-                + "1. Opret bestilling\n"
-                + "2. Fjern bestilling\n"
-                + "3. Se gemte bestillinger\n"
-                + "4. Vend tilbage til hovedmenu\n"
-                + "5. Afslut program\n");
+                + "1. Se bestillinger\n"
+                + "2. Opret bestilling\n"
+                + "3. Fjern bestilling\n"
+                + "4. Se gemte bestillinger\n"
+                + "5. Vend tilbage til hovedmenu\n"
+                + "0. Afslut program");
     }
 
     @Override

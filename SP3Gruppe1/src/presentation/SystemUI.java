@@ -3,6 +3,7 @@ package presentation;
 import businesslogic.*;
 import java.sql.Time;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /*
@@ -19,7 +20,7 @@ public class SystemUI implements UI {
         System.out.println("Vælg en af følgende muligheder:\n"
                 + "1. Vis menukort\n"
                 + "2. Bestillinger\n"
-                + "3. Afslut program");
+                + "0. Afslut program");
     }
 
     @Override
@@ -52,24 +53,29 @@ public class SystemUI implements UI {
     public void visBestillingsMenu() {
         System.out.println("Bestillinger\n"
                 + "Vælg en af følgende muligheder:\n"
-                + "1. Opret bestilling\n"
-                + "2. Fjern bestilling\n"
-                + "3. Se gemte bestillinger\n"
-                + "4. Vend tilbage til hovedmenu\n"
-                + "5. Afslut program");
+                + "1. Se bestillinger\n"
+                + "2. Opret bestilling\n"
+                + "3. Fjern bestilling\n"
+                + "4. Se gemte bestillinger\n"
+                + "5. Vend tilbage til hovedmenu\n"
+                + "0. Afslut program");
     }
 
     @Override
     public LocalTime vælgAfhentTid() {
-        System.out.println("Skriv hvornår bestillingen skal afhentes i HH:MM:SS format: ");
+        System.out.println("Skriv hvornår bestillingen skal afhentes i HH:MM format: ");
+        input.nextLine();
+        DateTimeFormatter dft = DateTimeFormatter.ofPattern("HH:mm");
+        
         String time = input.nextLine();
-        return LocalTime.parse(time);
+        return LocalTime.parse(time, dft);
     }
 
     @Override
     public int vælgAntal() {
         System.out.println("Skriv hvor mange pizzaer af denne variant som kunden ønsker: ");
         return input.nextInt();
+        
     }
 
     @Override

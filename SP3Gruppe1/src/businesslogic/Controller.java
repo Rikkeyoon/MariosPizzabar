@@ -32,24 +32,28 @@ public class Controller {
                     do {
                         switch (ui.hovedmenuValg()) {
                             case "1":
-                                db.opretBestilling();
+                                db.visBestillinger();
                                 break;
                             case "2":
-                                db.gemBestilling();
+                                db.opretBestilling();
                                 break;
                             case "3":
-                                db.visGemteBestillinger();
+                                db.gemBestilling();
+                                break;
                             case "4":
+                                db.visGemteBestillinger();
+                                break;
+                            case "5":
                                 quit = true;
                                 start();
                                 break;
-                            case "5":
+                            case "0":
                                 quit = true;
                                 break;
                         }
                     } while (!quit);
                     break;
-                case "3":
+                case "0":
                     quit = true;
                     break;
                 default:

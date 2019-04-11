@@ -19,7 +19,6 @@ public interface UI {
     public LocalTime vælgAfhentTid();
     public int vælgAntal();
     public int vælgPizzalNr();
-
     public void visPizzaNavn(String pizzaNavn);
 
 }
