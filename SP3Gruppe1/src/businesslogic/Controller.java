@@ -2,6 +2,8 @@ package businesslogic;
 
 import datalag.DBFacade;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import presentation.UI;
 
 /*
@@ -11,8 +13,12 @@ public class Controller {
 
     private UI ui;
     private DBFacade db;
+    Comparator<Bestilling> compareAfhentTid;
   
     public Controller(UI ui, DBFacade db) {
+        this.compareAfhentTid = (Bestilling bestil1, Bestilling bestil2) -> {
+            return bestil1.getAfhentTid().compareTo(bestil2.getAfhentTid());
+        };
         this.ui = ui;
         this.db = db;
      
@@ -60,6 +66,12 @@ public class Controller {
                     throw new IllegalArgumentException();
             }
         } while (!quit);
+    }
+    
+    public ArrayList<Bestilling> sorterBestillinger(ArrayList<Bestilling> bestillinger) {
+        //sorter bestillingsliste efter den, som skal afhentes først
+        Collections.sort(bestillinger, compareAfhentTid);
+        return bestillinger;
     }
 }
 
