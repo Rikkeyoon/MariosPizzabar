@@ -68,8 +68,6 @@ public class Controller {
                 case 0:
                     quit = true;
                     break;
-                default:
-                    throw new IllegalArgumentException();
             }
         } while (!quit);
     }

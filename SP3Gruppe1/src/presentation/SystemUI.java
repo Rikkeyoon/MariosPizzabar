@@ -5,15 +5,16 @@ import java.sql.Time;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /*
  * @author Nina, Rikke og Caroline
  */
 public class SystemUI implements UI {
-    
+
     private Scanner input = new Scanner(System.in);
-    
+
     @Override
     public void visHovedmenu() {
         System.out.println("Vælg en af følgende muligheder:\n"
@@ -21,46 +22,45 @@ public class SystemUI implements UI {
                 + "2. Bestillinger\n"
                 + "0. Afslut program");
     }
-    
+
     @Override
     public int hovedmenuValg() {
         int valg = input.nextInt();
-        while (valg < 0 || valg > 2)
-        {
+        while (valg < 0 || valg > 2) {
             System.out.println(valg + " er ikke en mulighed, prøv igen: ");
             valg = input.nextInt();
         }
-    
+
         return valg;
     }
-    
+
     @Override
     public void visMenukort(ArrayList<Pizza> menukort) {
         for (Pizza pizza : menukort) {
-            System.out.println(pizza.toString());            
+            System.out.println(pizza.toString());
         }
     }
-    
+
     @Override
     public void visBestillinger(ArrayList<Bestilling> bestillinger) {
         for (Bestilling bestilling : bestillinger) {
-            System.out.println(bestilling.toString());            
+            System.out.println(bestilling.toString());
         }
     }
-    
+
     @Override
     public int vælgBestilNrPåBestillingSomGemmes() {
         System.out.println("Indtast bestillingsnummeret på den bestilling, som du vil fjerne: ");
         return input.nextInt();
     }
-    
+
     @Override
     public void visGemteBestillinger(ArrayList<Bestilling> bestillinger) {
         for (Bestilling bestilling : bestillinger) {
-           System.out.println(bestilling.toString()); 
+            System.out.println(bestilling.toString());
         }
     }
-    
+
     @Override
     public void visBestillingsMenu() {
         System.out.println("Bestillinger\n"
@@ -72,41 +72,38 @@ public class SystemUI implements UI {
                 + "5. Vend tilbage til hovedmenu\n"
                 + "0. Afslut program");
     }
-    
+
     @Override
     public LocalTime vælgAfhentTid() {
         System.out.println("Skriv hvornår bestillingen skal afhentes i HH:MM format: ");
         input.nextLine();
         DateTimeFormatter dft = DateTimeFormatter.ofPattern("HH:mm");
-        
+
         String time = input.nextLine();
         return LocalTime.parse(time, dft);
     }
-    
+
     @Override
     public int vælgAntal() {
         System.out.println("Skriv hvor mange pizzaer af denne variant som kunden ønsker: ");
         int valg = input.nextInt();
-        
+
         return valg;
-        
+
     }
-    
+
     @Override
     public int vælgPizzaNr() {
         System.out.println("Skriv hvilket pizzanummer kunden ønsker:");
         int valg = input.nextInt();
- 
-        while (valg < 0 || valg > 15)
-        {
-            System.out.println(valg + " er ikke en mulighed, prøv igen: ");
-            valg = input.nextInt();
-        }
-    
+            while (valg < 0 || valg > 15) {
+                System.out.println(valg + " er ikke en mulighed, prøv igen: ");
+                valg = input.nextInt();
+            }
         return valg;
-        
+
     }
-    
+
     @Override
     public void visPizzaNavn(String pizzaNavn) {
         System.out.println(pizzaNavn);
@@ -115,13 +112,11 @@ public class SystemUI implements UI {
     @Override
     public int bestillingsMenuValg() {
         int valg = input.nextInt();
-        while (valg < 0 || valg > 5)
-        {
+        while (valg < 0 || valg > 5) {
             System.out.println(valg + " er ikke en mulighed, prøv igen: ");
             valg = input.nextInt();
         }
-    
+
         return valg;
     }
 }
-
