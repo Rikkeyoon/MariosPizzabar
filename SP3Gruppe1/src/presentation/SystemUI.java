@@ -24,7 +24,14 @@ public class SystemUI implements UI {
     
     @Override
     public String hovedmenuValg() {
-        return input.nextLine();
+        int valg = input.nextInt();
+        while (valg < 0 || valg > 2)
+        {
+            System.out.println(valg + " er ikke en mulighed, prøv igen: ");
+            valg = input.nextInt();
+        }
+    
+        return valg + "";
     }
     
     @Override
@@ -79,14 +86,29 @@ public class SystemUI implements UI {
     @Override
     public int vælgAntal() {
         System.out.println("Skriv hvor mange pizzaer af denne variant som kunden ønsker: ");
-        return input.nextInt();
+        int valg = input.nextInt();
+//        
+//        if (valg != (int)valg){
+//            System.out.println(valg + " er ikke en mulighed, prøv igen: ");
+//            valg = input.nextInt();
+//        
+//        }
+        return valg;
+        
+       
         
     }
     
     @Override
     public int vælgPizzaNr() {
         System.out.println("Skriv hvilket pizzanummer kunden ønsker:");
-        return input.nextInt();
+        int valg = input.nextInt();
+        
+//        if (valg < 1 || valg > 14) {
+//            System.out.println(valg + " er ikke en mulighed, prøv igen: ");
+//            valg = input.nextInt();
+//        }
+        return valg;
         
     }
     
@@ -95,3 +117,4 @@ public class SystemUI implements UI {
         System.out.println(pizzaNavn);
     }
 }
+
