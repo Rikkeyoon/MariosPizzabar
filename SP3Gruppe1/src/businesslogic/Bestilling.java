@@ -29,7 +29,7 @@ public class Bestilling {
 
     @Override
     public String toString() {
-        return "Ordre Nr:\t\t\t" + bestilNr
+        return "Ordre Nr:\t\t" + bestilNr
                 + "\nAfhentningstidspunkt:  \t" + afhentTid
                 + "\nOrdre beskrivelse:\n\t" /*1 x "*/
                 + "\nPris: \t\t\t     " /*+ (int) pizza.getPris() + ",-\n"*/;
