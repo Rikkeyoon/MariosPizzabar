@@ -13,7 +13,8 @@ public class Controller {
 
     private UI ui;
     private DBFacade db;
-    Comparator<Bestilling> compareAfhentTid;
+    private ArrayList<Bestilling> bestillinger;
+    private Comparator<Bestilling> compareAfhentTid;
   
     public Controller(UI ui, DBFacade db) {
         this.compareAfhentTid = (Bestilling bestil1, Bestilling bestil2) -> {
@@ -68,7 +69,7 @@ public class Controller {
         } while (!quit);
     }
     
-    public ArrayList<Bestilling> sorterBestillinger(ArrayList<Bestilling> bestillinger) {
+    public ArrayList<Bestilling> sorterBestillinger() {
         //sorter bestillingsliste efter den, som skal afhentes først
         Collections.sort(bestillinger, compareAfhentTid);
         return bestillinger;
