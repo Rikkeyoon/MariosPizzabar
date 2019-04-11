@@ -19,6 +19,7 @@ public class Controller {
     private int pizzaNr;
     private int antal;
     private LocalTime afhentTid;
+    private int bestilNr = 1;
   
     public Controller(UI ui, DBFacade db) {
         this.compareAfhentTid = (Bestilling bestil1, Bestilling bestil2) -> {
@@ -26,7 +27,6 @@ public class Controller {
         };
         this.ui = ui;
         this.db = db;
-     
     }
 
     public void start() {
@@ -82,13 +82,16 @@ public class Controller {
         
         //indlæs afhentningstidspunkt
         afhentTid = ui.vælgAfhentTid();
-
+        
         //opret bestilling
         Bestillingslinje bestilLinje = new Bestillingslinje(antal, pizzaNr);
-        Bestilling bestilling = new Bestilling(afhentTid, bestilLinje);
+        Bestilling bestilling = new Bestilling(bestilNr, afhentTid, bestilLinje);
         
         //gem bestilling i DB
         db.opretBestilling(bestilling);
+        
+        //increment bestilNr
+        bestilNr++;
     }
     
     public ArrayList<Bestilling> sorterBestillinger() {
